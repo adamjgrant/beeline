@@ -1,0 +1,1 @@
+node algorithm.js > cards.txt
