@@ -53,6 +53,7 @@ class Deck {
     let symmetry_card_set_1 = symmetry_cards.map(card => card.clone());
     let symmetry_card_set_2 = symmetry_cards.map(card => card.clone());
 
+    // Stub in wild values.
     symmetry_card_set_1[0].twelve_oclock = "*";
     symmetry_card_set_1[0].three_oclock = "*";
     symmetry_card_set_1[1].two_oclock = "*";
@@ -131,7 +132,7 @@ function testEqualLetterOccurrences(deck) {
 
   console.log("Full counts:");
   counts.forEach((count, index) => {
-    console.log(`Side ${index + 1}: ${JSON.stringify(count)}`);
+    console.log(`Side ${index + 1}: ${JSON.stringify(count)}\n`);
   });
 
   return true;
@@ -156,25 +157,26 @@ function testForDuplicateCards(deck) {
     duplicates.forEach(dup => {
       console.log(`Card ${dup.indices[0] + 1} and Card ${dup.indices[1] + 1} are duplicates: ${dup.card}`);
     });
+    console.log("\n");
   } else {
-    console.log("No duplicate cards found.");
+    console.log("Passed: No duplicate cards found.\n");
   }
 }
 
 // Function to print the deck in a tabular format
 function printDeck(deck) {
-  console.log('Card\tSide 1\tSide 2\tSide 3\tNumber');
-  console.log('----------------------------------');
+  console.log('|Card|Side 1|Side 2|Side 3|Number|');
+  console.log('|---|---|---|---|---|');
   deck.forEach((card, index) => {
-    let sides = card.sides.map(side => side === null ? '-' : side).join('\t');
+    let sides = card.sides.map(side => side === null ? '-' : side).join('|');
     let number = card.value;
-    console.log(`Card ${index + 1}\t${sides}\t${number}`);
+    console.log(`|Card ${index + 1}|${sides}|${number}|`);
   });
 }
 
 // Run the test for equal occurrences of B, H, and F
 let testResult = testEqualLetterOccurrences(filled_deck.deck);
-console.log("Test for equal occurrences of B, H, and F in each side:", testResult ? "Passed" : "Failed");
+console.log(`${testResult ? "Passed" : "Failed"}: Test for equal occurrences of B, H, and F in each side.\n`);
 
 // Run the test for duplicate cards
 testForDuplicateCards(filled_deck.deck);

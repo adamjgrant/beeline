@@ -1,1 +1,1 @@
-node algorithm.js > cards.txt
+node algorithm.js > cards.md
