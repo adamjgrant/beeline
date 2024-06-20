@@ -110,7 +110,7 @@ let filled_deck = new Deck();
 let deck_length_without_special_cards = filled_deck.deck.length - special_card_count;
 let sequence = "BHFBHF";
 let card_index = 0;
-let numerical_sequence = [10, 5, 5, 3, 3, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+let numerical_sequence = [10, 5, 5, 3, 3, 2, 2, 1, 1, 1, 1, 1];
 
 // Initialize the first row of the table with the pattern BHFBHF.
 // Fill in the subsequent rows by shifting the pattern to the left by one position for each row.
@@ -142,20 +142,14 @@ function swap_letters_for_cards_for_side(card1, card2, side) {
 }
 
 swap_letters_for_cards_for_side(25, 24, 1);
-swap_letters_for_cards_for_side(26, 22, 2);
-swap_letters_for_cards_for_side(27, 21, 1);
-swap_letters_for_cards_for_side(28, 20, 1);
-swap_letters_for_cards_for_side(29, 19, 1);
-swap_letters_for_cards_for_side(30, 18, 2);
-swap_letters_for_cards_for_side(31, 17, 1);
-swap_letters_for_cards_for_side(42, 16, 1);
-swap_letters_for_cards_for_side(43, 15, 1);
-swap_letters_for_cards_for_side(43, 14, 2);
-swap_letters_for_cards_for_side(47, 13, 2);
-swap_letters_for_cards_for_side(48, 12, 4);
-swap_letters_for_cards_for_side(49, 11, 3);
-swap_letters_for_cards_for_side(59, 10, 1);
-swap_letters_for_cards_for_side(60, 9, 2);
+swap_letters_for_cards_for_side(23, 22, 2);
+swap_letters_for_cards_for_side(35, 21, 1);
+swap_letters_for_cards_for_side(47, 20, 3);
+swap_letters_for_cards_for_side(48, 19, 1);
+swap_letters_for_cards_for_side(56, 18, 1);
+swap_letters_for_cards_for_side(57, 17, 1);
+swap_letters_for_cards_for_side(59, 16, 1);
+swap_letters_for_cards_for_side(60, 14, 2);
 
 // Special Cards (Rows 61 and 62): These cards don’t have anything on the sides. They just have an icon right in the center.
 
