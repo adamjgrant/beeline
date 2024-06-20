@@ -13,6 +13,10 @@ class Deck {
   set_side_at_card_index(card=0, index=0, value) {
     this.deck[card][index] = value;
   }
+
+  get_side_at_card_index(card=0, index=0) {
+    return this.deck[card][index];
+  }
   
   set_sides_at_card_index(card_index = 0, values = "BHFBHF") {
     const values_as_array = values.split("");
@@ -127,6 +131,32 @@ while (card_index < deck_length_without_special_cards) {
   sequence = sequence_as_array.join("");
 }
 
+// One off changes to prevent duplicate cards
+function swap_letters_for_cards_for_side(card1, card2, side) {
+  let [card_index1, card_index2] = [card1 - 1, card2 - 1];
+  let side_index = side - 1;
+  const card1_letter = filled_deck.get_side_at_card_index(card_index1, side_index);
+  const card2_letter = filled_deck.get_side_at_card_index(card_index2, side_index);
+  filled_deck.set_side_at_card_index(card_index1, side_index, card2_letter);
+  filled_deck.set_side_at_card_index(card_index2, side_index, card1_letter);
+}
+
+swap_letters_for_cards_for_side(25, 24, 1);
+swap_letters_for_cards_for_side(26, 22, 2);
+swap_letters_for_cards_for_side(27, 21, 1);
+swap_letters_for_cards_for_side(28, 20, 1);
+swap_letters_for_cards_for_side(29, 19, 1);
+swap_letters_for_cards_for_side(30, 18, 2);
+swap_letters_for_cards_for_side(31, 17, 1);
+swap_letters_for_cards_for_side(42, 16, 1);
+swap_letters_for_cards_for_side(43, 15, 1);
+swap_letters_for_cards_for_side(43, 14, 2);
+swap_letters_for_cards_for_side(47, 13, 2);
+swap_letters_for_cards_for_side(48, 12, 4);
+swap_letters_for_cards_for_side(49, 11, 3);
+swap_letters_for_cards_for_side(59, 10, 1);
+swap_letters_for_cards_for_side(60, 9, 2);
+
 // Special Cards (Rows 61 and 62): These cards don’t have anything on the sides. They just have an icon right in the center.
 
 // Function to count occurrences of B, H, and F in each side of the deck, excluding the last element (number column)
@@ -176,7 +206,33 @@ function testEqualLetterOccurrences(deck) {
 let testResult = testEqualLetterOccurrences(filled_deck.deck);
 console.log("Test for equal occurrences of B, H, and F in each side:", testResult ? "Passed" : "Failed");
 
+// Function to check for duplicate cards
+function testForDuplicateCards(deck) {
+  let cardMap = new Map();
+  let duplicates = [];
 
+  deck.forEach((card, index) => {
+    if (card.includes("Special")) return; // Skip special cards
+    let cardKey = card.slice(0, -1).join('') + card[6];
+    if (cardMap.has(cardKey)) {
+      duplicates.push({ card: cardKey, indices: [cardMap.get(cardKey), index] });
+    } else {
+      cardMap.set(cardKey, index);
+    }
+  });
+
+  if (duplicates.length > 0) {
+    console.log("Duplicate cards found:");
+    duplicates.forEach(dup => {
+      console.log(`Card ${dup.indices[0] + 1} and Card ${dup.indices[1] + 1} are duplicates: ${dup.card}`);
+    });
+  } else {
+    console.log("No duplicate cards found.");
+  }
+}
+
+// Run the test for duplicate cards
+testForDuplicateCards(filled_deck.deck);
 
 // Print the deck in a tabular format
 printDeck(filled_deck.deck);
