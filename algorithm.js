@@ -176,6 +176,8 @@ function testEqualLetterOccurrences(deck) {
 let testResult = testEqualLetterOccurrences(filled_deck.deck);
 console.log("Test for equal occurrences of B, H, and F in each side:", testResult ? "Passed" : "Failed");
 
+
+
 // Print the deck in a tabular format
 printDeck(filled_deck.deck);
 
