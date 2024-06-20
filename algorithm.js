@@ -1,7 +1,7 @@
 class Card {
-  constructor() {
-    this.sides = [];
-    this.value = 0;
+  constructor(sides=[], value=0) {
+    this.sides = sides;
+    this.value = value;
   }
   set twelve_oclock(value) {
     this.sides[0] = value;
@@ -35,6 +35,35 @@ class Deck {
   }
 
   initiate_deck() {
+    // With permutations of BHF, the deck will naturally have 27 variations.
+    // With alternating directions of the numerical sequence, this is doubled to 54.
+    // In order to have symmetry with these two conditions where there are no
+    // duplicate cards, half of the deck needs to be an even number, so we add 
+    // six extra cards rotating through BHF with wildcards 
+    // 
+    // We add three to each of the two iterations because we also need to keep the incidence
+    // rate of B, H, and F equal, which requires using them in alternating positions in a multiple
+    // of three cards.
+    let symmetry_cards = [
+      new Card("BHF".split("")),
+      new Card("HFB".split("")),
+      new Card("FBH".split(""))
+    ]
+
+    let symmetry_card_set_1 = symmetry_cards.map(card => card.clone());
+    let symmetry_card_set_2 = symmetry_cards.map(card => card.clone());
+
+    symmetry_card_set_1[0].twelve_oclock = "*";
+    symmetry_card_set_1[0].three_oclock = "*";
+    symmetry_card_set_1[1].two_oclock = "*";
+    symmetry_card_set_1[2].twelve_oclock = "*";
+    symmetry_card_set_1[2].three_oclock = "*";
+
+    symmetry_card_set_2[0].two_oclock = "*";
+    symmetry_card_set_2[1].twelve_oclock = "*";
+    symmetry_card_set_2[1].three_oclock = "*";
+    symmetry_card_set_2[2].two_oclock = "*";
+
     let index = 0;
     this.possible_values.forEach(twelve_oclock => {
       this.possible_values.forEach(two_oclock => {
@@ -48,14 +77,14 @@ class Deck {
         });
       });
     });
-    this.deck = [...this.deck, ...this.deck.map(card => card.clone())];
+    this.deck = [...this.deck, ...symmetry_card_set_1, ...this.deck.map(card => card.clone()), ...symmetry_card_set_2];
 
     const numerical_sequence = [
-      ...Array.from({ length: 9 }, () => 1),
-      ...Array.from({ length: 6 }, () => 2),
-      ...Array.from({ length: 5 }, () => 3),
-      ...Array.from({ length: 4 }, () => 5),
-      ...Array.from({ length: 3 }, () => 10)
+      ...Array.from({ length: 8 }, () => 1),
+      ...Array.from({ length: 7 }, () => 2),
+      ...Array.from({ length: 6 }, () => 3),
+      ...Array.from({ length: 5 }, () => 5),
+      ...Array.from({ length: 4 }, () => 10)
     ];
     let _numerical_sequence = [...numerical_sequence, ...numerical_sequence.reverse()];
     _numerical_sequence.forEach((value, index) => {
