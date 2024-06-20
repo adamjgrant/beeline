@@ -32,68 +32,56 @@ class Deck {
     let rule_index = card_index % 15;
     switch (rule_index) {
       case 0:
-        this.deck[card_index].fill('B');
-        this.set_value_of_card(card_index, 10);
+        this.set_sides_at_card_index(card_index, "BBBBBB");
         break;
       case 1:
-        this.deck[card_index].fill('F');
-        this.set_value_of_card(card_index, 5);
+        this.set_sides_at_card_index(card_index, "FFFFFF");
         break;
       case 2:
-        this.deck[card_index].fill('H');
-        this.set_value_of_card(card_index, 5);
+        this.set_sides_at_card_index(card_index, "HHHHHH");
         break;
       case 6:
         // Replace the first two non-B instances with B
         this.replace_non_instances(card_index, ['B'], 2);
         this.set_side_at_card_index(card_index, 0, 'F');
-        this.set_value_of_card(card_index, 2);
         break;
       case 7:
         // Replace the first three non-B instances with B
         this.replace_non_instances(card_index, ['B'], 1);
         this.set_side_at_card_index(card_index, 1, 'H');
-        this.set_value_of_card(card_index, 2);
         break;
       case 8:
         // Replace the first two non-F instances with F
         this.replace_non_instances(card_index, ['F'], 2);
         this.set_side_at_card_index(card_index, 0, 'B');
-        this.set_value_of_card(card_index, 1);
         break;
       case 9:
         // Replace the first three non-F instances with F
         this.replace_non_instances(card_index, ['F'], 3);
-        this.set_value_of_card(card_index, 1);
         break;
       case 10:
         // Replace the first two non-H instances with H
         this.replace_non_instances(card_index, ['H'], 1);
         this.set_side_at_card_index(card_index, 0, 'F');
-        this.set_value_of_card(card_index, 1);
         break;
       case 11:
         // Replace the first three non-H instances with H
         this.replace_non_instances(card_index, ['H'], 2);
-        this.set_value_of_card(card_index, 1);
         break;
       case 12:
         // For the first two non-B and non-F instances, replace with B and F respectively
         this.replace_non_instances(card_index, ['B', 'F'], 1);
         this.set_side_at_card_index(card_index, 2, 'H');
-        this.set_value_of_card(card_index, 1);
         break;
       case 13:
         // For the first two non-F and non-H instances, replace with F and H respectively
         this.replace_non_instances(card_index, ['F', 'H'], 1);
         this.set_side_at_card_index(card_index, 4, 'H');
-        this.set_value_of_card(card_index, 1);
         break;
       case 14:
         // For the first two non-H and non-B instances, replace with H and B respectively
         this.replace_non_instances(card_index, ['H', 'B'], 1);
         this.set_side_at_card_index(card_index, 5, 'B');
-        this.set_value_of_card(card_index, 1);
         break;
       default:
         // Do nothing for rows 3, 4, and 5
