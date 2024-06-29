@@ -1,3 +1,4 @@
+var scaling_factor = 6;
 // Access the active document
 var doc = app.activeDocument;
 
@@ -66,11 +67,13 @@ function collectVisibleObjectsFromLayers(layers, selectableItems) {
 
 // Function to export selected objects as assets
 function exportSelectedObjects(destinationFolder, fileName) {
-    var exportOptions = new ExportOptionsPNG24();
-    exportOptions.artBoardClipping = true;
+  var exportOptions = new ExportOptionsPNG24();
+  exportOptions.artBoardClipping = true;
+  exportOptions.horizontalScale = 100 * scaling_factor;
+  exportOptions.verticalScale = 100 * scaling_factor;
 
-    var file = new File(destinationFolder + "/" + fileName + ".png");
-    doc.exportFile(file, ExportType.PNG24, exportOptions);
+  var file = new File(destinationFolder + "/" + fileName + ".png");
+  doc.exportFile(file, ExportType.PNG24, exportOptions);
 }
 
 var LAYERS = {
@@ -103,7 +106,18 @@ var LAYERS = {
   BACKGROUND: "Background",
   AURAS: "Auras",
   SUBPLATE: "Subplate",
-  PLATE: "Plate"
+  PLATE: "Plate",
+  BIG_BEE: "Big Bee",
+  BIG_QUEEN: "Big Queen",
+  HOW_TO_PLAY: "How to Play",
+  HOW_TO_PLAY_BACKGROUND: "HTPBackground",
+  BEELINE: "Beeline",
+  BEELINE_TITLE: "Beeline Title",
+  BEELINE_STEP1: "Beeline Step 1",
+  BEELINE_STEP2: "Beeline Step 2",
+  BEELINE_STEP3: "Beeline Step 3",
+  BEELINE_STEP4: "Beeline Step 4",
+  CARD_BACK: "Card Back"
 }
 
 // Function to hide all layers defined in an object
@@ -115,32 +129,104 @@ function hideAllLayers() {
       }
   }
 }
-
 var RECIPES = [
-  {
-    "name": "card01",
-    "layers": [
-      LAYERS.ICONS,
-      LAYERS.SIDE1,
-      LAYERS.SIDE1B,
-      LAYERS.SIDE2,
-      LAYERS.SIDE2B,
-      LAYERS.SIDE3,
-      LAYERS.SIDE3B,
-      LAYERS.NUMERICAL_VALUES,
-      LAYERS.VALUE_1,
-      LAYERS.SHAPES,
-      LAYERS.NUMBER_HOLDER,
-      LAYERS.DASHED_LINE,
-      LAYERS.BACKGROUND,
-      LAYERS.AURAS,
-      LAYERS.SUBPLATE,
-      LAYERS.PLATE
-    ],
-    "symbols": "BBB",
-    "value": 1
-  }
+  { name: 'card01', layers: [], symbols: 'BBB', value: 1 },
+  { name: 'card02', layers: [], symbols: 'BBH', value: 1 },
+  { name: 'card03', layers: [], symbols: 'BBF', value: 1 },
+  { name: 'card04', layers: [], symbols: 'BHB', value: 1 },
+  { name: 'card05', layers: [], symbols: 'BHH', value: 1 },
+  { name: 'card06', layers: [], symbols: 'BHF', value: 1 },
+  { name: 'card07', layers: [], symbols: 'BFB', value: 1 },
+  { name: 'card08', layers: [], symbols: 'BFH', value: 1 },
+  { name: 'card09', layers: [], symbols: 'BFF', value: 2 },
+  { name: 'card10', layers: [], symbols: 'HBB', value: 2 },
+  { name: 'card11', layers: [], symbols: 'HBH', value: 2 },
+  { name: 'card12', layers: [], symbols: 'HBF', value: 2 },
+  { name: 'card13', layers: [], symbols: 'HHB', value: 2 },
+  { name: 'card14', layers: [], symbols: 'HHH', value: 2 },
+  { name: 'card15', layers: [], symbols: 'HHF', value: 2 },
+  { name: 'card16', layers: [], symbols: 'HFB', value: 3 },
+  { name: 'card17', layers: [], symbols: 'HFH', value: 3 },
+  { name: 'card18', layers: [], symbols: 'HFF', value: 3 },
+  { name: 'card19', layers: [], symbols: 'FBB', value: 3 },
+  { name: 'card20', layers: [], symbols: 'FBH', value: 3 },
+  { name: 'card21', layers: [], symbols: 'FBF', value: 3 },
+  { name: 'card22', layers: [], symbols: 'FHB', value: 5 },
+  { name: 'card23', layers: [], symbols: 'FHH', value: 5 },
+  { name: 'card24', layers: [], symbols: 'FHF', value: 5 },
+  { name: 'card25', layers: [], symbols: 'FFB', value: 5 },
+  { name: 'card26', layers: [], symbols: 'FFH', value: 5 },
+  { name: 'card27', layers: [], symbols: 'FFF', value: 10 },
+  { name: 'card28', layers: [], symbols: 'WHW', value: 10 },
+  { name: 'card29', layers: [], symbols: 'HWB', value: 10 },
+  { name: 'card30', layers: [], symbols: 'WBW', value: 10 },
+  { name: 'card31', layers: [], symbols: 'BBB', value: 10 },
+  { name: 'card32', layers: [], symbols: 'BBH', value: 10 },
+  { name: 'card33', layers: [], symbols: 'BBF', value: 10 },
+  { name: 'card34', layers: [], symbols: 'BHB', value: 10 },
+  { name: 'card35', layers: [], symbols: 'BHH', value: 5 },
+  { name: 'card36', layers: [], symbols: 'BHF', value: 5 },
+  { name: 'card37', layers: [], symbols: 'BFB', value: 5 },
+  { name: 'card38', layers: [], symbols: 'BFH', value: 5 },
+  { name: 'card39', layers: [], symbols: 'BFF', value: 5 },
+  { name: 'card40', layers: [], symbols: 'HBB', value: 3 },
+  { name: 'card41', layers: [], symbols: 'HBH', value: 3 },
+  { name: 'card42', layers: [], symbols: 'HBF', value: 3 },
+  { name: 'card43', layers: [], symbols: 'HHB', value: 3 },
+  { name: 'card44', layers: [], symbols: 'HHH', value: 3 },
+  { name: 'card45', layers: [], symbols: 'HHF', value: 3 },
+  { name: 'card46', layers: [], symbols: 'HFB', value: 2 },
+  { name: 'card47', layers: [], symbols: 'HFH', value: 2 },
+  { name: 'card48', layers: [], symbols: 'HFF', value: 2 },
+  { name: 'card49', layers: [], symbols: 'FBB', value: 2 },
+  { name: 'card50', layers: [], symbols: 'FBH', value: 2 },
+  { name: 'card51', layers: [], symbols: 'FBF', value: 2 },
+  { name: 'card52', layers: [], symbols: 'FHB', value: 2 },
+  { name: 'card53', layers: [], symbols: 'FHH', value: 1 },
+  { name: 'card54', layers: [], symbols: 'FHF', value: 1 },
+  { name: 'card55', layers: [], symbols: 'FFB', value: 1 },
+  { name: 'card56', layers: [], symbols: 'FFH', value: 1 },
+  { name: 'card57', layers: [], symbols: 'FFF', value: 1 },
+  { name: 'card58', layers: [], symbols: 'BWF', value: 1 },
+  { name: 'card59', layers: [], symbols: 'WFW', value: 1 },
+  { name: 'card60', layers: [], symbols: 'FWH', value: 1 },
+  { name: 'card61', layers: ["Background", "Auras", "Plate", "Shapes", "Subplate", "Big Bee"], symbols: '', value: 0 },
+  { name: 'card62', layers: ["Background", "Auras", "Plate", "Shapes", "Subplate", "Big Queen"], symbols: '', value: 0 },
+  { name: 'card63', layers: ["How to Play", "HTPBackground", "Beeline", "Beeline Title", "Beeline Step 1"], symbols: '', value: 0 },
+  { name: 'card64', layers: ["How to Play", "HTPBackground", "Beeline", "Beeline Title", "Beeline Step 2"], symbols: '', value: 0 },
+  { name: 'card65', layers: ["How to Play", "HTPBackground", "Beeline", "Beeline Title", "Beeline Step 3"], symbols: '', value: 0 },
+  { name: 'card66', layers: ["How to Play", "HTPBackground", "Beeline", "Beeline Title", "Beeline Step 4"], symbols: '', value: 0 },
+  { name: 'cardback', layers: ["Card Back"], symbols: '', value: 0 }
 ];
+
+var RECIPES_AS_PREVIEWS = []
+function shallowCopyObject(originalObject) {
+  var shallowCopy = {};
+  for (var key in originalObject) {
+    if (originalObject.hasOwnProperty(key)) {
+      shallowCopy[key] = originalObject[key];
+    }
+  }
+  return shallowCopy;
+}
+
+for (var m = 0; m < 5; m++) {
+  var recipe = shallowCopyObject(RECIPES[m*9]);
+  recipe.layers = recipe.layers.slice(); // Ensure layers array is copied correctly
+  recipe.layers.push(LAYERS.CUTLINE);
+  recipe.name = "preview_" + recipe.name;
+  RECIPES_AS_PREVIEWS.push(recipe);
+}
+RECIPES = RECIPES.concat(RECIPES_AS_PREVIEWS);
+RECIPES = RECIPES.concat([
+  { name: 'preview_cardback', layers: ["Card Back", "Cutline"], symbols: '', value: 0 },
+  { name: 'preview_card61', layers: ["Cutline", "Background", "Auras", "Plate", "Shapes", "Subplate", "Big Bee"], symbols: '', value: 0 },
+  { name: 'preview_card62', layers: ["Cutline", "Background", "Auras", "Plate", "Shapes", "Subplate", "Big Queen"], symbols: '', value: 0 },
+  { name: 'preview_card63', layers: ["Cutline", "How to Play", "HTPBackground", "Beeline", "Beeline Title", "Beeline Step 1"], symbols: '', value: 0 },
+  { name: 'preview_card64', layers: ["Cutline", "How to Play", "HTPBackground", "Beeline", "Beeline Title", "Beeline Step 2"], symbols: '', value: 0 },
+  { name: 'preview_card65', layers: ["Cutline", "How to Play", "HTPBackground", "Beeline", "Beeline Title", "Beeline Step 3"], symbols: '', value: 0 },
+  { name: 'preview_card65', layers: ["Cutline", "How to Play", "HTPBackground", "Beeline", "Beeline Title", "Beeline Step 4"], symbols: '', value: 0 },
+]);
 
 const destFolder = Folder.selectDialog("Select the folder to export to");
 
@@ -153,15 +239,29 @@ for (var i = 0; i < RECIPES.length; i++) {
   }
   
   if (recipe.symbols.length) {
+    showLayer(LAYERS.ICONS);
     var symbols = recipe.symbols.split("");
     for (var k = 0; k < symbols.length; k++) {
-      showLayer("side" + (k + 1) + symbols[k]);
+      showLayer(LAYERS["SIDE"+ (k+1)]);
+      showLayer(LAYERS["SIDE" + (k + 1) + symbols[k]]);
     }
   }
   
   if (recipe.value > 0) {
-    showLayer("Numerical Values");
-    showLayer("" + recipe.value);
+    var layers_to_show = [
+      LAYERS.NUMERICAL_VALUES,
+      LAYERS.SHAPES,
+      LAYERS.NUMBER_HOLDER,
+      LAYERS.DASHED_LINE,
+      LAYERS.BACKGROUND,
+      LAYERS.AURAS,
+      LAYERS.SUBPLATE,
+      LAYERS.PLATE
+    ]
+    for (var l = 0;l < layers_to_show.length;l++) {
+      showLayer(layers_to_show[l]);
+    }
+    showLayer(LAYERS["VALUE_" + recipe.value]);
   }
 
   var selectedItems = collectVisibleObjects();

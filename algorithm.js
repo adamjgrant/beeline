@@ -183,3 +183,18 @@ testForDuplicateCards(filled_deck.deck);
 
 // Print the deck in a tabular format
 printDeck(filled_deck.deck);
+
+function generateIllustratorRecipe(deck) { 
+  let RECIPES = [];
+  deck.forEach((card, index) => {
+    RECIPES.push({
+      "name": `card${(index+1).toString().padStart(2, '0')}`,
+      "layers": [],
+      "symbols": card.sides.join("").replaceAll(/\*/g, "W"),
+      "value": card.value 
+    });
+  })
+  console.log(RECIPES);
+}
+
+generateIllustratorRecipe(filled_deck.deck);
